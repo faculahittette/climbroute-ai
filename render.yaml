@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: climbroute-backend
+    env: python
+    plan: free
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT
+    branch: main
+    region: oregon
+    runtime: python
+    autoDeploy: true
+    envVars:
+      - key: WEIGHTS_PATH
+        value: weights/holds_detector.onnx
